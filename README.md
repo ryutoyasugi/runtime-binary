@@ -24,3 +24,14 @@ $ aws s3 cp main s3://$BUCKET
 $ docker build -t ryutoyasugi/runtime-binary .
 $ docker push ryutoyasugi/runtime-binary
 ```
+
+## Deploy to Knative
+```sh
+$ kn service create runtime-binary \
+--image ryutoyasugi/runtime-binary \
+--port 8080 \
+--env S3_ACCESS_KEY=$S3_ACCESS_KEY \
+--env S3_SECRET_KEY=$S3_SECRET_KEY \
+--env BUCKET=$BUCKET \
+--env TARGET=$TARGET
+```
